@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -6,8 +6,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let win;
+
 function createWindow() {
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 400, // Initial width
     height: 300, // Initial height
     frame: false, // This removes the default window frame
@@ -52,4 +54,11 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
+});
+
+// Listen for the "close-window" event
+ipcMain.on("close-window", () => {
+  if (win) {
+    win.close(); // Close the window
+  }
 });

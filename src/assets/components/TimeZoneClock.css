@@ -46,6 +46,14 @@
   gap: 0.5rem;
 }
 
+.timezone-item:nth-child(4) {
+  background-color: red;
+  display: flex;
+  grid-column-start: span 2;
+  /* grid-column-end: span 2; */
+  margin-left: 50%;
+}
+
 .timezone-item {
   background-color: #3797de;
   padding: 0.5rem;
